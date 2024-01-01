@@ -81,8 +81,7 @@ app.post("/api/excuse", async (c) => {
 
   const parsed = excuseSchema.safeParse(excuse);
   if (!parsed.success) {
-    return c.html(<Alert msg={parsed.error.message} />);
-    // return c.json({ err: parsed.error.errors }, 400); // 400 Bad Request
+    return c.html(<Alert msg={parsed.error.message} id={id} />);
   }
 
   const result = await db
@@ -132,6 +131,10 @@ app.put("/api/excuse", async (c) => {
       CreatedAt={parsed.data.createdAt}
     />
   );
+});
+
+app.delete("/api/excuse/dismis", async (c) => {
+  return c.body(null);
 });
 
 app.delete("/api/excuse/:id", async (c) => {

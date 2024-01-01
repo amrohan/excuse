@@ -28,7 +28,6 @@ export const Layout: FC = (props) => {
       <body style={bodyStyle}>
         <main class="p-2">{props.children}</main>
       </body>
-      <script src="https://unpkg.com/@material-tailwind/html@latest/scripts/dismissible.js"></script>
     </html>
   );
 };
@@ -108,7 +107,7 @@ export const Item = ({
   CreatedAt: string;
 }) => (
   <div id={`item${id}`} class="h-fit w-full">
-    <div class="flex items-center justify-between py-1 px-4 my-1 h-14  border-0 border-b border-zinc-400 z-10 text-black">
+    <div class="flex items-center justify-between py-1 px-4 my-1 h-14  border-0 border-b border-zinc-300 z-10 text-black">
       <div
         class="flex flex-col justify-center item-center w-full "
         hx-target={`#item${id}`}
@@ -213,16 +212,16 @@ export const UpdateItem = ({ excuse }: { excuse: Excuse }) => {
   );
 };
 
-export const Alert = ({ msg }: { msg: string }) => (
-  <Layout>
+export const Alert = ({ msg, id }: { msg: string; id: number }) => (
+  <section id={`alert${id}`}>
     <div
       role="alert"
       class="relative flex justify-between items-center w-full px-4 py-4 text-base text-white bg-gray-900 rounded-lg  animate-fade-down"
-      data-dismissible="alert"
     >
       <div class="mr-12 text-xs">{msg}</div>
       <button
-        data-dismissible-target="alert"
+        hx-delete="/api/excuse/dismis"
+        hx-target={`#alert${id}`}
         class="h-8 w-8 grid place-content-center  rounded-lg font-sans text-xs font-medium uppercase text-white transition-all hover:bg-white/10 active:bg-white/30 disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
         type="button"
       >
@@ -242,5 +241,5 @@ export const Alert = ({ msg }: { msg: string }) => (
         </svg>
       </button>
     </div>
-  </Layout>
+  </section>
 );
