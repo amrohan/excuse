@@ -109,10 +109,10 @@ export const Item = ({
   id: number | unknown;
   CreatedAt: string;
 }) => (
-  <div id="Item" class="h-fit w-full">
+  <div id={`item${id}`} class="h-fit w-full">
     <div
-      class="flex row items-center justify-between py-1 px-4 my-1 h-14  border-0 border-b border-zinc-400  text-black"
-      hx-target="#Item"
+      class="flex items-center justify-between py-1 px-4 my-1 h-14  border-0 border-b border-zinc-400  text-black"
+      hx-target={`#item${id}`}
       hx-get={`/api/excuse/${id}`}
       hx-swap="outerHTML"
     >
@@ -123,7 +123,7 @@ export const Item = ({
       <div class="flex items-center gap-1">
         <button
           class="font-medium"
-          hx-target="#Item"
+          hx-target={`#item${id}`}
           hx-delete={`/api/excuse/${id}`}
           hx-swap="outerHTML"
           hx-confirm="Are you sure you wish to delete this?"
@@ -137,13 +137,13 @@ export const Item = ({
 
 export const UpdateItem = ({ excuse }: { excuse: Excuse }) => {
   return (
-    <div id="updateContainer">
+    <div id={`edit${excuse.excuseID}`}>
       <div class="max-w-5xl mx-auto h-fit p-2">
         <form
           class="flex flex-col h-full gap-1 mt-2 w-full"
           hx-trigger="submit"
           hx-put="/api/excuse"
-          hx-target="#updateContainer"
+          hx-target={`#edit${excuse.excuseID}`}
           hx-ext="reset"
           _="on htmx:afterRequest reset() me"
           hx-vals='{"excuseID": this.excuseID.value, "title": this.title.value,"createdAt":this.createdAt.value}'
@@ -186,7 +186,7 @@ export const UpdateItem = ({ excuse }: { excuse: Excuse }) => {
             <button
               type="button"
               class="select-none rounded-lg border border-gray-900 py-2 px-6 text-center align-middle font-sans text-xs font-bold uppercase text-gray-900 transition-all hover:opacity-75 focus:ring focus:ring-gray-300 active:opacity-[0.85] disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
-              hx-target="#updateContainer"
+              hx-target={`#edit${excuse.excuseID}`}
               hx-get={`/api/excuse/cancel/${excuse.excuseID}`}
               hx-swap="outerHTML"
             >
