@@ -54,6 +54,26 @@ app.get("/api/excuse/:id", async (c) => {
   return c.html(<UpdateItem excuse={result} />);
 });
 
+app.get("/api/excuse/cancel/:id", async (c) => {
+  const id = c.req.param("id");
+  const db = c.env.DB;
+  const result = await db
+    .prepare("SELECT * FROM excuses WHERE excuseID = ?")
+    .bind(id)
+    .first<Excuse>();
+
+  if (result === null) {
+    return c.json({ err: "Not found" }, 404);
+  }
+  return c.html(
+    <Item
+      title={result.title}
+      CreatedAt={result.createdAt}
+      id={result.excuseID}
+    />
+  );
+});
+
 app.post("/api/excuse", async (c) => {
   const db = c.env.DB;
   const id = generateId();
