@@ -213,7 +213,7 @@ export const UpdateItem = ({ excuse }: { excuse: Excuse }) => {
 };
 
 export const Alert = ({ msg, id }: { msg: string; id: number }) => (
-  <section id={`alert${id}`}>
+  <section id={`alert${id}`} class="mb-2">
     <div
       role="alert"
       class="relative flex justify-between items-center w-full px-4 py-4 text-base text-white bg-gray-900 rounded-lg  animate-fade-down"
