@@ -1,6 +1,6 @@
 import { Hono } from "hono";
 import { z } from "zod";
-import { Item, Layout, Form, Alert } from "../components/index.js";
+import { Item, Layout, Form, Alert, UpdateItem } from "../components/index.js";
 import { generateId } from "../utils/genrateId.js";
 
 type Bindings = {
@@ -46,12 +46,12 @@ app.get("/api/excuse/:id", async (c) => {
   const result = await db
     .prepare("SELECT * FROM excuses WHERE excuseID = ?")
     .bind(id)
-    .first();
+    .first<Excuse>();
 
   if (result === null) {
     return c.json({ err: "Not found" }, 404);
   }
-  return c.json(result);
+  return c.html(<UpdateItem excuse={result} />);
 });
 
 app.post("/api/excuse", async (c) => {
@@ -96,16 +96,22 @@ app.get("/api/excuse", async (c) => {
 
 app.put("/api/excuse", async (c) => {
   const db = c.env.DB;
-  const excuse = await c.req.json();
+  const excuse = await c.req.parseBody();
   const parsed = excuseSchema.safeParse(excuse);
   if (!parsed.success) {
     return c.json({ err: parsed.error.errors }, 400);
   }
   const result = await db
-    .prepare("UPDATE excuses SET title = ?,  WHERE excuseID = ?")
-    .bind(excuse.title, excuse.excuseID)
+    .prepare("UPDATE excuses SET title = ?,createdAt = ? WHERE excuseID = ?")
+    .bind(excuse.title, excuse.createdAt, excuse.excuseID)
     .run();
-  return c.json({ result });
+  return c.html(
+    <Item
+      title={parsed.data.title}
+      id={excuse.excuseID}
+      CreatedAt={parsed.data.createdAt}
+    />
+  );
 });
 
 app.delete("/api/excuse/:id", async (c) => {
