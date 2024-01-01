@@ -8,29 +8,14 @@ const bodyStyle = {
 
 export const Layout: FC = (props) => {
   return (
-    <html>
+    <html lang="en">
       <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Our Excuses | amrohan</title>
         <script src="https://unpkg.com/htmx.org@1.9.10"></script>
         {/* Tailwind css */}
         <script src="https://cdn.tailwindcss.com"></script>
-
-        {/* Material Tailwind */}
-        <link
-          rel="stylesheet"
-          href="https://unpkg.com/@material-tailwind/html@latest/styles/material-tailwind.css"
-        />
-
-        {/* Google Icons */}
-        <link
-          href="https://fonts.googleapis.com/icon?family=Material+Icons"
-          rel="stylesheet"
-        />
-        <link
-          rel="stylesheet"
-          href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
-        />
 
         {/* Google fonts */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -39,7 +24,6 @@ export const Layout: FC = (props) => {
           href="https://fonts.googleapis.com/css2?family=Inter&display=swap"
           rel="stylesheet"
         ></link>
-        <style></style>
       </head>
       <body style={bodyStyle}>
         <main class="p-2">{props.children}</main>
@@ -66,7 +50,7 @@ export const Form: FC = () => {
         <div class="w-full h-full">
           <div class="relative w-full h-10">
             <input
-              class="peer w-full h-full bg-transparent text-blue-gray-700 font-sans font-normal outline outline-0 focus:outline-0 disabled:bg-blue-gray-50 disabled:border-0 transition-all placeholder-shown:border placeholder-shown:border-blue-gray-200 placeholder-shown:border-t-blue-gray-200 border focus:border-2 border-t focus:border-t-transparent text-sm px-3 py-2.5 rounded-[7px] border-blue-gray-200 focus:border-gray-900"
+              class="peer w-full h-full bg-transparent text-blue-gray-700  font-normal outline outline-0 focus:outline-0 disabled:bg-blue-gray-50 disabled:border-0 transition-all placeholder-shown:border placeholder-shown:border-blue-gray-200  border focus:border-2 border-t-0 focus:border-t-transparent text-sm px-3 py-2.5 rounded-[7px] border-gray-300 focus:border-gray-900"
               placeholder=" "
               name="title"
             />
@@ -81,18 +65,32 @@ export const Form: FC = () => {
             name="createdAt"
             class="bg-transparent mr-2 focus:outline-none fill-current w-5"
           />
-          <span class="material-symbols-outlined absolute -z-10">
-            calendar_today
-          </span>
+          {/* Calender */}
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            height="24"
+            viewBox="0 -960 960 960"
+            width="24"
+            class="fill-current size-6 absolute -z-10"
+          >
+            <path d="M200-80q-33 0-56.5-23.5T120-160v-560q0-33 23.5-56.5T200-800h40v-80h80v80h320v-80h80v80h40q33 0 56.5 23.5T840-720v560q0 33-23.5 56.5T760-80H200Zm0-80h560v-400H200v400Zm0-480h560v-80H200v80Zm0 0v-80 80Z" />
+          </svg>
         </div>
+        {/* Add icon */}
         <div class="w-10 h-full">
           <button
-            class="relative h-10 max-h-[40px] w-10 max-w-[40px] select-none rounded-lg bg-gray-900 text-center align-middle font-sans text-xs font-medium uppercase text-white shadow-md shadow-gray-900/10 transition-all hover:shadow-lg hover:shadow-gray-900/20 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
+            class="relative grid place-content-center h-10 max-h-[40px] w-10 max-w-[40px] select-none rounded-lg bg-gray-900 text-center align-middle font-sans text-xs font-medium uppercase text-white shadow-md shadow-gray-900/10 transition-all hover:shadow-lg hover:shadow-gray-900/20 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
             type="submit"
           >
-            <span class="absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 transform">
-              <span class="material-symbols-outlined">add</span>
-            </span>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              height="24"
+              viewBox="0 -960 960 960"
+              width="24"
+              class="fill-current size-5 "
+            >
+              <path d="M440-440H200v-80h240v-240h80v240h240v80H520v240h-80v-240Z" />
+            </svg>
           </button>
         </div>
       </form>
@@ -110,25 +108,34 @@ export const Item = ({
   CreatedAt: string;
 }) => (
   <div id={`item${id}`} class="h-fit w-full">
-    <div
-      class="flex items-center justify-between py-1 px-4 my-1 h-14  border-0 border-b border-zinc-400  text-black"
-      hx-target={`#item${id}`}
-      hx-get={`/api/excuse/${id}`}
-      hx-swap="outerHTML"
-    >
-      <div class="flex flex-col justify-center item-center">
+    <div class="flex items-center justify-between py-1 px-4 my-1 h-14  border-0 border-b border-zinc-400 z-10 text-black">
+      <div
+        class="flex flex-col justify-center item-center w-full "
+        hx-target={`#item${id}`}
+        hx-get={`/api/excuse/${id}`}
+        hx-swap="outerHTML"
+      >
         <p class="text-sm">{title}</p>
         <p class="text-xs text-zinc-700">{format(CreatedAt, "MMM d, yyyy")}</p>
       </div>
-      <div class="flex items-center gap-1">
+      <div class="flex items-center gap-1 z-20">
+        {/* Delete Icon */}
         <button
-          class="font-medium"
+          type="button"
           hx-target={`#item${id}`}
           hx-delete={`/api/excuse/${id}`}
           hx-swap="outerHTML"
           hx-confirm="Are you sure you wish to delete this?"
         >
-          <span class="material-symbols-outlined">delete</span>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            height="24"
+            viewBox="0 -960 960 960"
+            width="24"
+            class="fill-current size-5"
+          >
+            <path d="M280-120q-33 0-56.5-23.5T200-200v-520h-40v-80h200v-40h240v40h200v80h-40v520q0 33-23.5 56.5T680-120H280Zm400-600H280v520h400v-520ZM360-280h80v-360h-80v360Zm160 0h80v-360h-80v360ZM280-720v520-520Z" />
+          </svg>
         </button>
       </div>
     </div>
@@ -153,7 +160,7 @@ export const UpdateItem = ({ excuse }: { excuse: Excuse }) => {
               <input type="hidden" name="excuseID" value={excuse.excuseID} />
               <div class="relative w-full h-10">
                 <input
-                  class="peer w-full h-full bg-transparent text-blue-gray-700 font-sans font-normal outline outline-0 focus:outline-0 disabled:bg-blue-gray-50 disabled:border-0 transition-all placeholder-shown:border placeholder-shown:border-blue-gray-200 placeholder-shown:border-t-blue-gray-200 border focus:border-2 border-t focus:border-t-transparent text-sm px-3 py-2.5 rounded-[7px] border-blue-gray-200 focus:border-gray-900"
+                  class="peer w-full h-full bg-transparent text-blue-gray-700  font-normal outline outline-0 focus:outline-0 disabled:bg-blue-gray-50 disabled:border-0 transition-all placeholder-shown:border placeholder-shown:border-blue-gray-200  border focus:border-2 border-t-0 focus:border-t-transparent text-sm px-3 py-2.5 rounded-[7px] border-blue-gray-300 focus:border-gray-900"
                   placeholder=" "
                   name="title"
                   value={excuse.title}
@@ -170,13 +177,20 @@ export const UpdateItem = ({ excuse }: { excuse: Excuse }) => {
                 name="createdAt"
                 class="bg-transparent mr-2 focus:outline-none fill-current w-5"
               />
-              <span class="material-symbols-outlined absolute -z-10">
-                calendar_today
-              </span>
+              {/* Calender  */}
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                height="24"
+                viewBox="0 -960 960 960"
+                width="24"
+                class="fill-current size-6 absolute -z-10"
+              >
+                <path d="M200-80q-33 0-56.5-23.5T120-160v-560q0-33 23.5-56.5T200-800h40v-80h80v80h320v-80h80v80h40q33 0 56.5 23.5T840-720v560q0 33-23.5 56.5T760-80H200Zm0-80h560v-400H200v400Zm0-480h560v-80H200v80Zm0 0v-80 80Z" />
+              </svg>
             </div>
           </div>
 
-          <div class="w-full h-fit flex justify-end items-center gap-2">
+          <div class="w-full h-fit flex justify-end items-center gap-2 mt-1">
             <button
               class="select-none rounded-lg bg-gray-900 py-2 px-6 text-center align-middle font-sans text-xs font-bold uppercase text-white shadow-md shadow-gray-900/10 transition-all hover:shadow-lg hover:shadow-gray-900/20 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
               type="submit"
