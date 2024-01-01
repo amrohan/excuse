@@ -116,7 +116,7 @@ export const Item = ({
         hx-swap="outerHTML"
       >
         <p class="text-sm">{title}</p>
-        <p class="text-xs text-zinc-700">{format(CreatedAt, "MMM d, yyyy")}</p>
+        <p class="text-xs text-zinc-600">{format(CreatedAt, "MMM d, yyyy")}</p>
       </div>
       <div class="flex items-center gap-1 z-20">
         {/* Delete Icon */}
