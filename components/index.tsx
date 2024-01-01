@@ -109,7 +109,7 @@ export const Item = ({
   id: number | unknown;
   CreatedAt: string;
 }) => (
-  <div id="Item" class="h-full w-full">
+  <div id="Item" class="h-fit w-full">
     <div class="flex row items-center justify-between py-1 px-4 my-1 h-14  border-0 border-b border-zinc-400  text-black">
       <div class="flex flex-col justify-center item-start">
         <p class="text-sm">{title}</p>
@@ -118,7 +118,7 @@ export const Item = ({
       <div class="flex items-center gap-1">
         <button
           class="font-medium"
-          hx-target="#Item"
+          hx-target="#excuse"
           hx-get={`/api/excuse/${id}`}
           hx-swap="outerHTML"
         >
@@ -126,7 +126,7 @@ export const Item = ({
         </button>
         <button
           class="font-medium"
-          hx-target="#Item"
+          hx-target="#excuse"
           hx-delete={`/api/excuse/${id}`}
           hx-swap="outerHTML"
           hx-confirm="Are you sure you wish to delete this?"
