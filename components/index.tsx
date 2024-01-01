@@ -75,12 +75,15 @@ export const Form: FC = () => {
             </label>
           </div>
         </div>
-        <div class="w-fit h-full flex justify-center items-center">
+        <div class="w-fit h-full grid place-content-center">
           <input
             type="date"
             name="createdAt"
             class="bg-transparent mr-2 focus:outline-none fill-current w-5"
           />
+          <span class="material-symbols-outlined absolute -z-10">
+            calendar_today
+          </span>
         </div>
         <div class="w-10 h-full">
           <button
@@ -161,13 +164,16 @@ export const UpdateItem = ({ excuse }: { excuse: Excuse }) => {
             </label>
           </div>
         </div>
-        <div class="w-fit h-full flex justify-center items-center">
+        <div class="w-fit h-full grid place-content-center">
           <input
             type="date"
             value={format(excuse.createdAt, "yyyy-MM-dd")}
             name="createdAt"
             class="bg-transparent mr-2 focus:outline-none fill-current w-5"
           />
+          <span class="material-symbols-outlined absolute -z-10">
+            calendar_today
+          </span>
         </div>
         <div class="w-10 h-full">
           <button
