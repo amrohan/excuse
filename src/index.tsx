@@ -7,7 +7,8 @@ type Bindings = {
   DB: D1Database;
 };
 const excuseSchema = z.object({
-  Title: z.string().min(4),
+  title: z.string().min(4),
+  createdAt: z.string().min(4),
 });
 
 export type Excuse = {
@@ -57,11 +58,10 @@ app.post("/api/excuse", async (c) => {
   const db = c.env.DB;
   const id = generateId();
   const excuse = await c.req.parseBody();
-  const date = new Date().toISOString();
 
   const parsed = excuseSchema.safeParse(excuse);
   if (!parsed.success) {
-    return c.html(<Alert msg="Title must be more than 4 character" />);
+    return c.html(<Alert msg={parsed.error.message} />);
     // return c.json({ err: parsed.error.errors }, 400); // 400 Bad Request
   }
 
@@ -69,11 +69,15 @@ app.post("/api/excuse", async (c) => {
     .prepare(
       "INSERT INTO excuses (excuseID, title, createdAt) VALUES (?, ?, ?)"
     )
-    .bind(id, parsed.data.Title, date)
+    .bind(id, parsed.data.title, parsed.data.createdAt)
     .run();
 
   return c.html(
-    <Item title={parsed.data.Title} id={id} CreatedAt={date}></Item>
+    <Item
+      title={parsed.data.title}
+      id={id}
+      CreatedAt={parsed.data.createdAt}
+    ></Item>
   );
 });
 
