@@ -126,7 +126,7 @@ export const Item = ({
         </button>
         <button
           class="font-medium"
-          hx-target="#excuse"
+          hx-target="#Item"
           hx-delete={`/api/excuse/${id}`}
           hx-swap="outerHTML"
           hx-confirm="Are you sure you wish to delete this?"
