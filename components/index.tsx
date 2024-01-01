@@ -110,20 +110,17 @@ export const Item = ({
   CreatedAt: string;
 }) => (
   <div id="Item" class="h-fit w-full">
-    <div class="flex row items-center justify-between py-1 px-4 my-1 h-14  border-0 border-b border-zinc-400  text-black">
-      <div class="flex flex-col justify-center item-start">
+    <div
+      class="flex row items-center justify-between py-1 px-4 my-1 h-14  border-0 border-b border-zinc-400  text-black"
+      hx-target="#Item"
+      hx-get={`/api/excuse/${id}`}
+      hx-swap="outerHTML"
+    >
+      <div class="flex flex-col justify-center item-center">
         <p class="text-sm">{title}</p>
         <p class="text-xs text-zinc-700">{format(CreatedAt, "MMM d, yyyy")}</p>
       </div>
       <div class="flex items-center gap-1">
-        <button
-          class="font-medium"
-          hx-target="#Item"
-          hx-get={`/api/excuse/${id}`}
-          hx-swap="outerHTML"
-        >
-          <span class="material-symbols-outlined">edit</span>
-        </button>
         <button
           class="font-medium"
           hx-target="#Item"
