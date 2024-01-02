@@ -107,17 +107,17 @@ export const Item = ({
   CreatedAt: string;
 }) => (
   <div id={`item${id}`} class="h-fit w-full">
-    <div class="flex items-center justify-between py-1 px-4 my-1 h-fit  border-0 border-b border-zinc-300 z-10 text-black">
+    <div class="flex items-center justify-between py-1 px-4 my-1 h-fit border-0 border-b border-zinc-300 z-10 text-black">
       <div
-        class="flex flex-col justify-center item-center h-full w-full "
+        class="flex flex-col justify-center item-center h-full w-11/12 "
         hx-target={`#item${id}`}
         hx-get={`/api/excuse/${id}`}
         hx-swap="outerHTML"
       >
-        <p class="text-sm">{title}</p>
+        <p class="text-sm break-words">{title}</p>
         <p class="text-xs text-zinc-600">{format(CreatedAt, "MMM d, yyyy")}</p>
       </div>
-      <div class="flex items-center gap-1 z-20">
+      <div class="flex items-center justify-end w-1/12 z-20">
         {/* Delete Icon */}
         <button
           type="button"
@@ -143,7 +143,7 @@ export const Item = ({
 
 export const UpdateItem = ({ excuse }: { excuse: Excuse }) => {
   return (
-    <div id={`edit${excuse.excuseID}`}>
+    <div id={`edit${excuse.excuseID}`} class="h-fit w-full">
       <div class="max-w-5xl mx-auto h-fit p-2">
         <form
           class="flex flex-col h-full gap-1 mt-2 w-full"
