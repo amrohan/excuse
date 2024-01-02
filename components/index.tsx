@@ -40,7 +40,7 @@ export const Form: FC = () => {
         class="flex justify-start items-center h-full gap-1 mt-2"
         hx-trigger="submit"
         hx-post="/api/excuse"
-        hx-swap="beforebegin"
+        hx-swap="afterbegin"
         hx-target="#excuse"
         hx-ext="reset"
         _="on htmx:afterRequest reset() me"
@@ -107,9 +107,9 @@ export const Item = ({
   CreatedAt: string;
 }) => (
   <div id={`item${id}`} class="h-fit w-full">
-    <div class="flex items-center justify-between py-1 px-4 my-1 h-14  border-0 border-b border-zinc-300 z-10 text-black">
+    <div class="flex items-center justify-between py-1 px-4 my-1 h-fit  border-0 border-b border-zinc-300 z-10 text-black">
       <div
-        class="flex flex-col justify-center item-center w-full "
+        class="flex flex-col justify-center item-center h-full w-full "
         hx-target={`#item${id}`}
         hx-get={`/api/excuse/${id}`}
         hx-swap="outerHTML"

@@ -1,4 +1,5 @@
 import { Hono } from "hono";
+import { basicAuth } from "hono/basic-auth";
 import { z } from "zod";
 import { Item, Layout, Form, Alert, UpdateItem } from "../components/index.js";
 import { generateId } from "../utils/genrateId.js";
@@ -19,6 +20,14 @@ export type Excuse = {
 
 const app = new Hono<{ Bindings: Bindings }>();
 
+app.use(
+  "/*",
+  basicAuth({
+    username: "",
+    password: "",
+  })
+);
+
 app.get("/", async (c) => {
   const db = c.env.DB;
   const { results } = await db
@@ -30,12 +39,17 @@ app.get("/", async (c) => {
   return c.html(
     <Layout>
       <Form></Form>
-      <div id="excuse"></div>
-      {excuse.map((i) => {
-        return (
-          <Item title={i.title} id={i.excuseID} CreatedAt={i.createdAt}></Item>
-        );
-      })}
+      <div id="excuse">
+        {excuse.map((i) => {
+          return (
+            <Item
+              title={i.title}
+              id={i.excuseID}
+              CreatedAt={i.createdAt}
+            ></Item>
+          );
+        })}
+      </div>
     </Layout>
   );
 });
