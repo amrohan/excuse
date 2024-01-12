@@ -24,6 +24,11 @@ export const Layout: FC = (props) => {
           href="https://fonts.googleapis.com/css2?family=Inter&display=swap"
           rel="stylesheet"
         ></link>
+        <style>{`
+        ::-webkit-calendar-picker-indicator {
+              opacity:0;
+          }
+      `}</style>
       </head>
       <body style={bodyStyle}>
         <main class="p-2">{props.children}</main>
@@ -35,7 +40,7 @@ export const Layout: FC = (props) => {
 export const Form: FC = () => {
   return (
     <div class="max-w-5xl mx-auto h-fit p-2">
-      <h1 class="text-2xl font-bold">Excuses list</h1>
+      <h1 class="text-2xl font-bold">Excuse list</h1>
       <form
         class="flex justify-start items-center h-full gap-1 mt-2"
         hx-trigger="submit"
@@ -58,11 +63,11 @@ export const Form: FC = () => {
             </label>
           </div>
         </div>
-        <div class="w-fit h-full grid place-content-center">
+        <div class="size-10 min-w-10 w-10 grid place-content-center border border-gray-300 rounded-md relative">
           <input
             type="date"
             name="createdAt"
-            class="bg-transparent mr-2 focus:outline-none fill-current w-5"
+            class="bg-transparent focus:outline-none fill-current w-5"
           />
           {/* Calender */}
           <svg
@@ -70,7 +75,7 @@ export const Form: FC = () => {
             height="24"
             viewBox="0 -960 960 960"
             width="24"
-            class="fill-current size-6 absolute -z-10"
+            class="fill-current text-black size-6 absolute -z-10 inset-0 m-auto "
           >
             <path d="M200-80q-33 0-56.5-23.5T120-160v-560q0-33 23.5-56.5T200-800h40v-80h80v80h320v-80h80v80h40q33 0 56.5 23.5T840-720v560q0 33-23.5 56.5T760-80H200Zm0-80h560v-400H200v400Zm0-480h560v-80H200v80Zm0 0v-80 80Z" />
           </svg>

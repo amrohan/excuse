@@ -25,7 +25,7 @@ app.use(
   basicAuth({
     username: "",
     password: "",
-  })
+  }),
 );
 
 app.get("/", async (c) => {
@@ -50,7 +50,7 @@ app.get("/", async (c) => {
           );
         })}
       </div>
-    </Layout>
+    </Layout>,
   );
 });
 
@@ -84,7 +84,7 @@ app.get("/api/excuse/cancel/:id", async (c) => {
       title={result.title}
       CreatedAt={result.createdAt}
       id={result.excuseID}
-    />
+    />,
   );
 });
 
@@ -100,7 +100,7 @@ app.post("/api/excuse", async (c) => {
 
   const result = await db
     .prepare(
-      "INSERT INTO excuses (excuseID, title, createdAt) VALUES (?, ?, ?)"
+      "INSERT INTO excuses (excuseID, title, createdAt) VALUES (?, ?, ?)",
     )
     .bind(id, parsed.data.title, parsed.data.createdAt)
     .run();
@@ -110,7 +110,7 @@ app.post("/api/excuse", async (c) => {
       title={parsed.data.title}
       id={id}
       CreatedAt={parsed.data.createdAt}
-    ></Item>
+    ></Item>,
   );
 });
 
@@ -143,7 +143,7 @@ app.put("/api/excuse", async (c) => {
       title={parsed.data.title}
       id={excuse.excuseID}
       CreatedAt={parsed.data.createdAt}
-    />
+    />,
   );
 });
 
