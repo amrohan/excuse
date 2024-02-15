@@ -50,16 +50,13 @@ app.get("/", async (c) => {
           );
         })}
 
-        <div id="loadMore" class="w-full grid place-content-center">
-          <button
-            hx-target="#loadMore"
-            hx-swap="outerHTML"
-            hx-get={`/api/excuse/next/${10}`}
-            class="text-sm py-1.5 px-4 w-fit bg-zinc-900 text-white rounded-md my-4"
-          >
-            Load more...
-          </button>
-        </div>
+        <button
+          hx-swap="outerHTML"
+          hx-get={`/api/excuse/next/${10}`}
+          class="text-sm py-2 w-full bg-zinc-800 text-white rounded-md my-3"
+        >
+          Load More
+        </button>
       </div>
     </Layout>
   );
@@ -93,16 +90,13 @@ app.get("/api/excuse/next/:offset", async (c) => {
         );
       })}
 
-      <div id="loadMore" class="w-full grid place-content-center">
-        <button
-          hx-target="#loadMore"
-          hx-swap="outerHTML"
-          hx-get={`/api/excuse/next/${offset + 10}`}
-          class="text-sm py-1.5 px-4 w-fit bg-zinc-900 text-white rounded-md my-4"
-        >
-          Load more...
-        </button>
-      </div>
+      <button
+        hx-swap="outerHTML"
+        hx-get={`/api/excuse/next/${offset + 10}`}
+        class="text-sm py-2 w-full bg-zinc-800 text-white rounded-md my-3"
+      >
+        Load More
+      </button>
     </>
   );
 });
