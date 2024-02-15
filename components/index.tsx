@@ -31,7 +31,7 @@ export const Layout: FC = (props) => {
       `}</style>
       </head>
       <body style={bodyStyle}>
-        <main class="p-2">{props.children}</main>
+        <main class="max-w-5xl mx-auto p-2">{props.children}</main>
       </body>
     </html>
   );
